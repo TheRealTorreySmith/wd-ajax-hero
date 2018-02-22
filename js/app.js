@@ -53,8 +53,35 @@
       $('#listings').append($col);
 
       $('.modal-trigger').leanModal();
+
+
     }
   };
-
   // ADD YOUR CODE HERE
+$("button").click(function(event) {
+  $('movies').empty();
+  });
+  $("button").click(function(event) {
+    event.preventDefault();
+    var searchValue = $('#search').val();
+    //console.log(`GET https://omdb-api.now.sh/?s=${searchValue}`);
+    var $xhr = $.getJSON(`https://omdb-api.now.sh/?s=${searchValue}`);
+    //console.log(searchValue);
+  $xhr.done(function(data) {
+      //console.log(data);
+      for (var i = 0; i < data.Search.length; i++) {
+          console.log(data.Search[i]);
+        movies.push({
+              id: data.Search[i].imdbID,
+              poster: data.Search[i].Poster,
+              title: data.Search[i].Title,
+              year: data.Search[i].Year
+        });
+      }
+      renderMovies()
+      $("button").click(function(event) {
+        movies.length = 0;
+        });
+    });
+  });
 })();
