@@ -58,9 +58,6 @@
     }
   };
   // ADD YOUR CODE HERE
-$("button").click(function(event) {
-  $('movies').empty();
-  });
   $("button").click(function(event) {
     event.preventDefault();
     var searchValue = $('#search').val();
